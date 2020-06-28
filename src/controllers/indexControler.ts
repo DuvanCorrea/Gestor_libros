@@ -2,10 +2,10 @@ import { Request, Response } from "express";
 
 class indexControler {
     public index(req: Request, res: Response) {
-        res.render("index", { layout: false })
+        res.render("index", { title: "Inicio" })
     }
 }
 
-export const ic = new indexControler();
+export default new indexControler();
 
 

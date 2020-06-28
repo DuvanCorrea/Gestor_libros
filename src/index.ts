@@ -4,6 +4,7 @@ import path from "path";
 
 //Importando rutas
 import indexRoutes from "./routes/index.routes";
+import booksRoutes from "./routes/books.routes";
 
 //Inicializacion de express
 const app = express();
@@ -15,6 +16,7 @@ app.engine(
   ".hbs",
   habs({
     extname: ".hbs",
+    defaultLayout: "main",
     layoutsDir: path.join(app.get("views"), "layouts"),
     partialsDir: path.join(app.get("views"), "partials"),
     helpers: require("./lib/helpers"),
@@ -27,7 +29,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //Rutas
-app.use("/books", indexRoutes);
+app.use("/", indexRoutes)
+app.use("/books", booksRoutes);
 
 //Archivos estaticos
 app.use(express.static(path.join(__dirname, "public")));
