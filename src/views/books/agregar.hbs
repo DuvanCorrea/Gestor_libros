@@ -1,1 +1,18 @@
-<h1>Agregar libros</h1>
+<div class="col-4 mx-auto mt-5">
+    <form class="from" method="POST" action="/books/agregar">
+        <h3 class="card-title">Agregar libro</h3>
+        <div class="form-group">
+            <input type="text" name="nombreLibro" class="form-control" placeholder="Nombre del libro" required>
+        </div>
+        <div class="form-group">
+            <input type="text" name="autorLibro" class="form-control" placeholder="Autor" required>
+        </div>
+        <div class="form-group">
+            <input type="text" name="temaLibro" class="form-control" placeholder="Tema" required>
+        </div>
+        <div class="form-group">
+            <input type="number" name="year" class="form-control" placeholder="Año de publicacion" required>
+        </div>
+        <button class="btn btn-primary btn-block">Guardar</button>
+    </form>
+</div>

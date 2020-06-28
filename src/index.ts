@@ -2,6 +2,9 @@ import express from "express";
 import habs from "express-handlebars";
 import path from "path";
 
+//Base de datos
+import "./database"
+
 //Importando rutas
 import indexRoutes from "./routes/index.routes";
 import booksRoutes from "./routes/books.routes";
