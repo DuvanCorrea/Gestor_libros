@@ -1,1 +1,26 @@
-<h1>Books index</h1>
+<p hidden="true" id="Libros">{{books}}</p>
+<div class="row" id="bookplace">
+</div>
+<script>
+    const libros = document.getElementById("Libros").textContent;
+    const card = document.getElementById("bookplace")
+    const librosArray = JSON.parse(libros);
+
+    let inner = "";
+
+    librosArray.map(e => {
+        inner += `
+        <div class="col-4" >
+            <div class="card card-body" >
+                <h2>${e.nombreLibro}</h2>
+                <p>Autor: ${e.autorLibro}</p>
+                <p>Tema: ${e.temaLibro}</p>
+                <p>Año: ${e.year}</p>
+            </div>
+        </div>
+        `
+        return 0;
+    })
+
+    card.innerHTML = inner
+</script>

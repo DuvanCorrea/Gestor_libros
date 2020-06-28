@@ -2,15 +2,19 @@ import { Request, Response } from "express";
 import Book, { IBook } from "../models/book"
 
 class booksControler {
-    public index(req: Request, res: Response): void {
-        res.render("books/index", { title: "Libros" })
+    public async indexBook(req: Request, res: Response): Promise<void> {
+        const books: IBook[] = await Book.find();
+        console.log(books)
+        const booksStringify = JSON.stringify(books)
+        console.log(booksStringify)
+        res.render("books/index", { title: "Libros", books: booksStringify })
     }
 
     public agregar(req: Request, res: Response): void {
         res.render("books/agregar", { title: "Agregar libros" })
     }
 
-    public agregarLibro(req: Request, res: Response): void {
+    public async agregarLibro(req: Request, res: Response): Promise<void> {
         const { nombreLibro, autorLibro, temaLibro, year } = req.body
         const newBook: IBook = new Book({
             nombreLibro,
@@ -18,7 +22,8 @@ class booksControler {
             temaLibro,
             year
         })
-        console.log(newBook);
+        await newBook.save();
+        res.redirect("/books")
     }
 }
 
