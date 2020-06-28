@@ -1,32 +1,38 @@
 import express from "express";
-import hbs from "express-handlebars";
+import habs from "express-handlebars";
 import path from "path";
 
-// inicializacion de express
+//Importando rutas
+import indexRoutes from "./routes/index.routes";
+
+//Inicializacion de express
 const app = express();
 
 //configuracion
 app.set("port", process.env.PORT || 3000);
 app.set("views", path.join(__dirname, "views"));
-app.set(
+app.engine(
   ".hbs",
-  hbs({
+  habs({
     extname: ".hbs",
     layoutsDir: path.join(app.get("views"), "layouts"),
-    partialsDir: path.join(app.get("views"), "partial"),
+    partialsDir: path.join(app.get("views"), "partials"),
+    helpers: require("./lib/helpers"),
   })
 );
+app.set("view engine", ".hbs");
 
-//midlewares
+//Midlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-//rutas
+//Rutas
+app.use("/books", indexRoutes);
 
-// archivos estaticos
+//Archivos estaticos
+app.use(express.static(path.join(__dirname, "public")));
 
 //Iniciar servidor
-
 app.listen(app.get("port"), () => {
   console.log("Servidor en puerto ", app.get("port"));
 });
